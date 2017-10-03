@@ -11,4 +11,8 @@ export class HomePage {
 
   }
 
+  gotoPost() {
+    this.navCtrl.push('PostPage');
+  }
+
 }
