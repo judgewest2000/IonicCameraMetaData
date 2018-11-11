@@ -19,25 +19,88 @@
         <img [src]="image.base64" />
         <ion-card-content>
             <ion-item>
-                <h2>Name</h2>
-                <p>{{image.name}}</p>
+                <h2>Aperture</h2>
+                <p>{{image.exifDetail.aperture}}</p>
             </ion-item>
             <ion-item>
-                <h2>Last Modifed</h2>
-                <p>{{image.lastModified}}</p>
+                <h2>Date Time</h2>
+                <p>{{image.exifDetail.datetime}}</p>
             </ion-item>
             <ion-item>
-                <h2>Local Url</h2>
-                <p>{{image.localUrl}}</p>
+                <h2>Exposure Time</h2>
+                <p>{{image.exifDetail.exposureTime}}</p>
             </ion-item>
             <ion-item>
-                <h2>Native Url</h2>
-                <p>{{image.nativeUrl}}</p>
+                <h2>Flash</h2>
+                <p>{{image.exifDetail.flash}}</p>
             </ion-item>
             <ion-item>
-                <h2>Size</h2>
-                <p>{{image.size}}</p>
+                <h2>Focal Length</h2>
+                <p>{{image.exifDetail.focalLength}}</p>
             </ion-item>
+            <ion-item>
+                <h2>GPS Altitude</h2>
+                <p>{{image.exifDetail.gpsAltitude}}</p>
+            </ion-item>
+           
+            <ion-item>
+                <h2>GPS Altitude</h2>
+                <p>{{image.exifDetail.gpsAltitude}}</p>
+            </ion-item>
+            <ion-item>
+                <h2>GPS Altitude Ref</h2>
+                <p>{{image.exifDetail.gpsAltitudeRef}}</p>
+            </ion-item>
+            <ion-item>
+                <h2>GPS Datestamp</h2>
+                <p>{{image.exifDetail.gpsDateStamp}}</p>
+            </ion-item>
+            <ion-item>
+                <h2>GPS Latitude</h2>
+                <p>{{image.exifDetail.gpsLatitude}}</p>
+            </ion-item>
+            <ion-item>
+                <h2>GPS Latitude Ref</h2>
+                <p>{{image.exifDetail.gpsLatitudeRef}}</p>
+            </ion-item>
+            <ion-item>
+                <h2>GPS Longitude</h2>
+                <p>{{image.exifDetail.gpsLongitude}}</p>
+            </ion-item>
+            <ion-item>
+                <h2>GPS Longitude Ref</h2>
+                <p>{{image.exifDetail.gpsLongitudeRef}}</p>
+            </ion-item>
+            <ion-item>
+                <h2>GPS Processing Method</h2>
+                <p>{{image.exifDetail.gpsProcessingMethod}}</p>
+            </ion-item>
+            <ion-item>
+                <h2>GPS Timestamp</h2>
+                <p>{{image.exifDetail.gpsTimestamp}}</p>
+            </ion-item>
+
+            <ion-item>
+                <h2>ISO</h2>
+                <p>{{image.exifDetail.iso}}</p>
+            </ion-item>
+            <ion-item>
+                <h2>Make</h2>
+                <p>{{image.exifDetail.make}}</p>
+            </ion-item>
+            <ion-item>
+                <h2>Model</h2>
+                <p>{{image.exifDetail.model}}</p>
+            </ion-item>
+            <ion-item>
+                <h2>Orientation</h2>
+                <p>{{image.exifDetail.orientation}}</p>
+            </ion-item>
+            <ion-item>
+                <h2>White Balance</h2>
+                <p>{{image.exifDetail.whiteBalance}}</p>
+            </ion-item>
+
             
         </ion-card-content>
     </ion-card>

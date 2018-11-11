@@ -14,14 +14,36 @@ import { ResourceLoader } from '@angular/compiler';
  * Ionic pages and navigation.
  */
 
-interface ImageDetail {
+interface CameraDetail {
+  filename: string;
+  json_metadata: string;
+}
+
+interface CameraExifDetail {
+  aperture: string;
+  datetime: string;
+  exposureTime: string;
+  flash: string;
+  focalLength: string;
+  gpsAltitude: string;
+  gpsAltitudeRef: string;
+  gpsDateStamp: string;
+  gpsLatitude: string;
+  gpsLatitudeRef: string;
+  gpsLongitude: string;
+  gpsLongitudeRef: string;
+  gpsProcessingMethod: string;
+  gpsTimestamp: string;
+  iso: string;
+  make: string;
+  model: string;
+  orientation: string;
+  whiteBalance: string;
+}
+
+interface Output {
   base64: string;
-  name: string;
-  lastModified: Date;
-  localUrl: string;
-  nativeUrl: string;
-  size: number;
-  type: string;
+  exifDetail: CameraExifDetail;
 }
 
 @IonicPage()
@@ -38,73 +60,30 @@ export class PostPage {
     console.log('ionViewDidLoad PostPage');
   }
 
-  images: ImageDetail[] = [];
+  images: Output[] = [];
 
-  getFileMeta(fileEntry: FileEntry) {
-    return new Promise<IFile>((resolve, reject) => {
-      fileEntry.file(success => {
-        resolve(success);
-      });
-    });
-
-  }
-
-  async getFileData(fullUrl: string) {
-
-    if (fullUrl.substring(0, 21) == "content://com.android") {
-      const photo_split = fullUrl.split("%3A");
-      fullUrl = "content://media/external/images/media/" + photo_split[1];
-    }
-    const resolvedFileSystemUri = await this.file.resolveLocalFilesystemUrl(fullUrl) as FileEntry;
-
-    const split = fullUrl.split('/');
-
-    // const path = split.splice(0, split.length - 1).join('/');
-
-    // const file = split[0];
-
-
-
-    const fileMeta = await this.getFileMeta(resolvedFileSystemUri);
-
-    debugger;
-
-    const path = resolvedFileSystemUri.nativeURL.substring(0, resolvedFileSystemUri.nativeURL.lastIndexOf('/'));
-
-    const fileName = resolvedFileSystemUri.name;
-
-    const base64 = await this.file.readAsDataURL(path, fileName);
-
-    debugger;
-
-    const imageDetail: ImageDetail = {
-      base64: base64,
-      lastModified: new Date(fileMeta.lastModifiedDate),
-      localUrl: fileMeta.localURL,
-      nativeUrl: resolvedFileSystemUri.nativeURL,
-      name: fileMeta.name,
-      size: fileMeta.size,
-      type: fileMeta.type
-    };
-
-    this.images.unshift(imageDetail);
-
-  }
 
   takePicture() {
 
     const options: CameraOptions = {
       quality: 100,
-      sourceType: this.camera.PictureSourceType.CAMERA,
-      destinationType: this.camera.DestinationType.FILE_URI,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      correctOrientation: true
     }
 
-    this.camera.getPicture(options).then((imageData) => {
+    this.camera.getPicture(options).then((imageData: string) => {
 
-      this.getFileData(imageData);
+      const cameraDetail = <CameraDetail>JSON.parse(imageData);
 
+      const exifData = <CameraExifDetail>JSON.parse(cameraDetail.json_metadata);
+
+      const output: Output = {
+        base64: `data:image/jpeg;base64,${cameraDetail.filename}`,
+        exifDetail: exifData
+      };
+
+      this.images.unshift(output);
 
     }, (err) => {
     });
