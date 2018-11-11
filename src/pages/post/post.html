@@ -14,13 +14,31 @@
 
 
 <ion-content>
-    <button ion-button (click)="takePicture();">Take Picture</button>
+    <button ion-button block style="height: 90px;" (click)="takePicture();">Take Picture</button>
     <ion-card *ngFor="let image of images; let i = index;">
-        <img [src]="image" />
+        <img [src]="image.base64" />
         <ion-card-content>
-            <ion-card-title>
-                Image number # {{i}}
-            </ion-card-title>
+            <ion-item>
+                <h2>Name</h2>
+                <p>{{image.name}}</p>
+            </ion-item>
+            <ion-item>
+                <h2>Last Modifed</h2>
+                <p>{{image.lastModified}}</p>
+            </ion-item>
+            <ion-item>
+                <h2>Local Url</h2>
+                <p>{{image.localUrl}}</p>
+            </ion-item>
+            <ion-item>
+                <h2>Native Url</h2>
+                <p>{{image.nativeUrl}}</p>
+            </ion-item>
+            <ion-item>
+                <h2>Size</h2>
+                <p>{{image.size}}</p>
+            </ion-item>
+            
         </ion-card-content>
     </ion-card>
 </ion-content>
